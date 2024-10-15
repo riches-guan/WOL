@@ -7,7 +7,7 @@
     },
     "repository" : {
         "type":"git",
-        "url":"https://github.com/node-red/node-red-nodes/tree/master/io/wol"
+        "url":"https://github.com/riches-guan/WOL.git"
     },
     "license": "Apache-2.0",
     "keywords": [ "node-red", "wol", "wake_on_lan" ],
@@ -17,8 +17,8 @@
         }
     },
     "author": {
-        "name": "Dave Conway-Jones",
-        "email": "ceejay@vnet.ibm.com",
-        "url": "http://nodered.org"
+        "name": "rehua",
+        "email": "rehua7686@gmail.com",
+        "url": "http://www.icccontrol.top"
     }
 }
