@@ -1,0 +1,63 @@
+
+<script type="text/html" data-template-name="wake on lan">
+    <div class="form-row">
+        <label for="node-input-mac" style="width:120px;"><i class="fa fa-address-card-o"></i> MAC 地址</label>
+        <input type="text" id="node-input-mac" placeholder="e.g. DE:AD:BE:EF:FE:ED">
+    </div>
+    <div class="form-row">
+        <label for="node-input-host" style="width:120px;"><i class="fa fa-globe"></i> 目标地址</label>
+        <input type="text" id="node-input-host" placeholder="e.g. 192.168.1.255 or 10.255.255.255">
+    </div>
+    <div class="form-row">
+        <label for="node-input-udpport" style="width:120px;"><i class="fa fa-random"></i> 目标UDP端口</label>
+        <input type="number" id="node-input-udpport" placeholder="9">
+    </div>
+    <div class="form-row">
+        <label for="node-input-numpackets" style="width:120px;"><i class="fa fa-envelope"></i> 数据包数量</label>
+        <input type="number" id="node-input-numpackets" placeholder="3">
+    </div>
+    <div class="form-row">
+        <label for="node-input-interval" style="width:120px;"><i class="fa fa-clock-o"></i> 数据包之间的间隔 (ms)</label>
+        <input type="number" id="node-input-interval" placeholder="100">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name" style="width:120px;"><i class="fa fa-tag"></i> 名称</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-tips">提示：如果您想使用<code>msg.mac</code>或<code>msg.host</code]动态设置目标信息，请留空。</div>
+</script>
+
+<script type="text/html" data-help-name="wake on lan">
+    <p>向指定的mac地址发送LAN唤醒魔术包。</p>
+    <p>您可以将<code>msg.mac</code>设置为动态地将目标设备mac设置为唤醒。</p>
+    <p>可以选择使用<code>msg.host</code>设置目标机器的地址</p>
+    <p>同样，您可以使用<code>msg.udpupport</code>、<code>msg.numpackets</code>、<code>msg.interval</code>'设置目标UDP端口、发送的数据包数量和数据包之间的间隔。</p>
+    <p>将目标地址设置为目标计算机连接到的子网的广播地址效果最佳。
+        对于C类地址，这通常只是ip地址的前三个部分，后面是255。例如192.168.1.255。</p>
+    <p>您可以指定目标UDP端口（默认值9）、发送的数据包数量（默认值3）和数据包之间的间隔（默认值100ms）。</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('wake on lan',{
+        category: 'network-output',
+        color:"#999966",
+        defaults: {
+            mac: {value:""},
+            host: {value:""},
+            udpport: {value:9, validate:RED.validators.number()},
+            numpackets: {value:3},
+            interval: {value:100},
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "light.png",
+        align: "left",
+        label: function() {
+            return this.name ? this.name : (this.mac ? "WOL: "+this.mac : "网络唤醒") ;
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
